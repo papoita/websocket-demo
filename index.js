@@ -13,7 +13,9 @@ const websocket = new WebSocketServer({
 
 websocket.on ("request", request => {
   connection = request.accept(null, request.origin)
-  connection.on("onopen", e => console.log("opened!"))
+  connection.on("onopen", () => console.log("opened!"))
+  connection.on("onclose", () => console.log("closed!"))
+  connection.on("onmessage", message => console.log(`Received message ${message}`))
 })
 
 httpserver.listen(8080, () => console.log("My server is listening"))
